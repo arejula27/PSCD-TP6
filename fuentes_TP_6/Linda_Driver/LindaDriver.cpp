@@ -1,7 +1,7 @@
 //*****************************************************************
 // File:   LindaDriver.cpp
 // Author: PSCD-Unizar
-// Date:   noviembre 2020
+// Date:   Diciembre 2020
 // Coms:   Especificación de la clase
 //*****************************************************************
 
