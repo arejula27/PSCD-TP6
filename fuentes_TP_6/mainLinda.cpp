@@ -1,7 +1,7 @@
 //*****************************************************************
 // File:   mainLinda.cpp
-// Author: PSCD-Unizar
-// Date:   septiembre 2020
+// Author: PSCD-Unizar, Grupo 1
+// Date:   Diciembre 2020
 // Coms:   Esqueleto para prueba del TP-6
 //         invocar mediante
 //            mainLindaDriver IP_LindaRegisterServer Port_LindaRegisterServer ...
