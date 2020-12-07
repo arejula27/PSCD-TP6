@@ -1,6 +1,6 @@
 //*****************************************************************
 // File:   mainLinda.cpp
-// Author: PSCD-Unizar, Grupo 1
+// Author: duchate, Grupo 1
 // Date:   Diciembre 2020
 // Coms:   Esqueleto para prueba del TP-6
 //         invocar mediante
