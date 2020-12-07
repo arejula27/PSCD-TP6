@@ -1,6 +1,6 @@
 # PSCD-TP6
 
-Git clone http... --> DEscarga el repo
+Git clone http... --> Descarga el repo
 git commit -a --> Establece los cambios definitivos, al darle a enter tienes que poner un mensaje
 git restore . --> Recuperas los archivos del ultimo commit por si la has cagado
 
