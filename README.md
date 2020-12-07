@@ -9,4 +9,3 @@ git push --> Subir los archivos al repo en github
 git add . --> Sube todos los archivos editados para poder commitearlos
 
 Git status --> Ver el estado del repo local
-ASDASDASDSDA
