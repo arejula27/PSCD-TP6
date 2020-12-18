@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include <cassert>
+#include <string.h>
 #include <Tupla.hpp>
 
 Tupla::Tupla(int n) {
@@ -60,8 +61,14 @@ Tupla::Tupla(string s1, string s2, string s3, string s4, string s5, string s6) {
     data->at(5) = s6;
 }
 
-Tupla::Tupla(const Tupla&) {
-    //To be done
+Tupla::Tupla(Tupla& t) {
+    //TODO
+    //ESTO NO FUNCIONA!!!!!!!!!!!!!!
+    int max=t.size();
+    int i=0;
+    while(i<max){
+        set(i,t.get(i));
+    }
 }
 
 Tupla::~Tupla() {
@@ -91,9 +98,29 @@ void Tupla::set(int pos, string value) {
 
 void Tupla::from_string(string s) {
     assert(s.length()>2 && s[0]=='[' && s[s.size()-1]==']');
-    //To be done
+    int n = s.length(); 
+    char c[n + 1];
+    // string to char array
+    strcpy(c, s.c_str());
+    char *token = strtok(c, "[,]");
+    int i=0;
+    while(token!=NULL){
+        data->at(i)=token;
+        token = strtok(NULL, "[,]"); 
+        i++;
+    }
 }
 
-bool match(Tupla p) {
-    //To be done
+bool Tupla::match(Tupla& p) {
+    bool igual=true;
+    int tam=size();
+    if(tam==p.size()){
+        int i=0;
+        while(i<tam && igual){
+            if(get(i)!=p.get(i)) igual=false;
+            i++;
+        }
+    }
+    else igual=false;
+    return igual;
 }

@@ -29,7 +29,7 @@ public:
 	Tupla(string s1, string s2, string s3, string s4, string s5);
 	Tupla(string s1, string s2, string s3, string s4, string s5, string s6);
 	//Creo una tupla a partir de otra. Se trata de un duplicado
-	Tupla(const Tupla&);
+	Tupla(Tupla& t);
 	
 	//destructor -----------------------------
 	~Tupla();
@@ -59,7 +59,7 @@ public:
 
 	//Pre:  "p" es un patrón
 	//Post: ¿Se emparejan "this" y "p"?
-	bool match(Tupla p);
+	bool match(Tupla& p);
 private:
 	//la tupla se almacenará como un vector de strings. Dado que antes
 	//de su declaración no se conoce el número de componentes, declaramos
