@@ -60,7 +60,7 @@ Tupla::Tupla(string s1, string s2, string s3, string s4, string s5, string s6) {
     data->at(5) = s6;
 }
 
-Tupla::Tupla(Tupla t) {
+Tupla::Tupla(const Tupla&) {
     //To be done
 }
 
