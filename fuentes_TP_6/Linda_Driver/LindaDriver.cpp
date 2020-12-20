@@ -9,8 +9,9 @@
 #include <string>
 #include "LindaDriver.hpp"
  
-    LindaDriver::LindaDriver(...){
-
+    LindaDriver::LindaDriver(string ip, string puerto){
+		this->puerto = puerto;
+		this->ip = ip;
     }
 	//destructor -----------------------------
 	LindaDriver::~LindaDriver(){

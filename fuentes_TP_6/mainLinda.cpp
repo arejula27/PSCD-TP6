@@ -1,6 +1,6 @@
 //*****************************************************************
 // File:   mainLinda.cpp
-// Author: duchate, Grupo 1
+// Author: Grupo 1
 // Date:   Diciembre 2020
 // Coms:   Esqueleto para prueba del TP-6
 //         invocar mediante
@@ -18,7 +18,7 @@ using namespace std;
 int main(int argc, char* argv[]) {
 
     //faltan argumentos en la invocación?
-    if (argc < ... ) {
+    if (argc < 3 ) {
         cerr << "Invocar como:" << endl
              << "   mainLindaDriver <IP_LS> <Port_LS> ..." << endl
              << "      <IP_LS>: IP del servidor Linda" << endl
@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
     t3.from_string("[a,b,c,45,34,pan]");
     // mostrará [a,b,c,45,34,pan] por stdout
     cout << t3.to_string() << endl;
-    ...
+    //TO DO
 
     // Crea una tupla de 3 elementos "".
     // Equivalente a Tupla t5("","","")
@@ -66,7 +66,7 @@ int main(int argc, char* argv[]) {
     cout << t5.to_string() << endl;
     // informará de que tiene 3 elementos
     cout << "t5 tiene " << t5.size() << " elementos" << endl;
-    ...
+    //TO DO
 
     // Un patrón no es otra cosa que una tupla con
     // la posibilidad de contener el comodín "?" en una o más posiciones
@@ -82,14 +82,14 @@ int main(int argc, char* argv[]) {
     LD.RN(p2, res2); // res2 tomará el valor que tenía t3
     cout << res1.to_string() << endl; //mostrará [1000]
     cout << res2.to_string() << endl; //mostrará [a,b,c,45,34,pan]
-    ...
+    //TO DO
 
     // ¿Si necesitamos un array de tuplas?
     // Tupla v[2]; // NO permitido: no hay constructor por defecto
     Tupla* v[2];
     v[0] = new Tupla("Juan", "1000");
     v[1] = new Tupla("Luisa", "1000", "enero");
-    ...
+    //TO DO
     delete v[0];
     delete v[1];
 
