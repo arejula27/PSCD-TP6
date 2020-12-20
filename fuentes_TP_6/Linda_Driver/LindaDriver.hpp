@@ -44,6 +44,8 @@ public:
 
 	//...
 private:
-	//...
+	//tocar estos campos
+	int puerto;
+	string ip;
 };
 #endif

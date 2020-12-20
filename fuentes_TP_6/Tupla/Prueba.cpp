@@ -7,7 +7,7 @@ int main(int argc, char* argv[]) {
     cout << t3.to_string();
     cout << t4.to_string();
     cout << t3.match(t4);
-    //Tupla t5(t4);
+    Tupla t5(t4);
     t3.from_string("[a,b,c,45,34,pan]");
     cout << t3.to_string();
     cout << t3.match(t4);
