@@ -28,7 +28,7 @@ void LindaServer(){
 //-------------------------------------------------------------
 int main(int argc, char* argv[]) {
     list<Tupla> listaTuplas;
-    const int N = 8; //¿Se pone aqui el máximo de clientes a la vez o se ponen en el registro de despliegue?
+    const int N = 13; //¿Se pone aqui el máximo de clientes a la vez o se ponen en el registro de despliegue?
     // Puerto donde escucha el proceso servidor
     int SERVER_PORT = atoi(argv[1]); //parámetro de invocación
     thread cliente[N];
