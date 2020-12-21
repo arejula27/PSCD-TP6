@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
     t3.from_string("[a,b,c,45,34,pan]");
     // mostrará [a,b,c,45,34,pan] por stdout
     cout << t3.to_string() << endl;
-    //TO DO
+    //TODO
 
     // Crea una tupla de 3 elementos "".
     // Equivalente a Tupla t5("","","")
@@ -66,7 +66,7 @@ int main(int argc, char* argv[]) {
     cout << t5.to_string() << endl;
     // informará de que tiene 3 elementos
     cout << "t5 tiene " << t5.size() << " elementos" << endl;
-    //TO DO
+    //TODO
 
     // Un patrón no es otra cosa que una tupla con
     // la posibilidad de contener el comodín "?" en una o más posiciones
@@ -82,7 +82,7 @@ int main(int argc, char* argv[]) {
     LD.RN(p2, res2); // res2 tomará el valor que tenía t3
     cout << res1.to_string() << endl; //mostrará [1000]
     cout << res2.to_string() << endl; //mostrará [a,b,c,45,34,pan]
-    //TO DO
+    //TODO
 
     // ¿Si necesitamos un array de tuplas?
     // Tupla v[2]; // NO permitido: no hay constructor por defecto
