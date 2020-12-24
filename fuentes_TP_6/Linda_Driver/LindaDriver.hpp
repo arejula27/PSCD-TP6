@@ -44,7 +44,7 @@ public:
 	//      emparejando "t1" con "p1" y "t2" con "p2"
 	void RDN_2(const Tupla p1, const Tupla p2, Tupla& t1, Tupla& t2);
 
-	//...
+	void auxiliarConRD(string mensaje, string ip, int puerto, string& ipdev, int& puertodev);
 private:
 	int puerto;
 	string ip;

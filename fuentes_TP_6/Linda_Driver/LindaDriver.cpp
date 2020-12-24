@@ -22,13 +22,11 @@
 
 	//PostNote
 	void LindaDriver::PN(const Tupla t){
-		Socket chan(ip, puerto);
 		Tupla tup(t);
 		string mensaje=to_string(tup.size());
-		int socket_fd;
-    	int send_bytes = chan.Send(socket_fd, mensaje);
-		int read_bytes = chan.Recv(socket_fd, buffer, MESSAGE_SIZE);
-		read_bytes = chan.Recv(socket_fd, buffer, MESSAGE_SIZE);
+		int puertodev;
+		string ipdev;
+		auxiliarConRD(mensaje,ip,puerto,ipdev,puertodev);
     }
 
 	//Pre:  "p" y "t" tienen el mismo tamaño
@@ -56,3 +54,15 @@
 	void LindaDriver::RDN_2(const Tupla p1, const Tupla p2, Tupla& t1, Tupla& t2){
         
     }
+
+	//Conexion con registro de despliegue
+	void LindaDriver::auxiliarConRD(string mensaje, string ip, int puerto, string& ipdev, int& puertodev){
+		Socket chan(ip, puerto);
+		int socket_fd;
+    	int send_bytes = chan.Send(socket_fd, mensaje);
+		string buffer;
+		int read_bytes = chan.Recv(socket_fd, buffer, 1024);
+		ipdev=buffer;
+		read_bytes = chan.Recv(socket_fd, buffer, 1024);
+		puertodev=stoi(buffer);
+	}

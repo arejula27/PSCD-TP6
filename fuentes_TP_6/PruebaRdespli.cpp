@@ -42,7 +42,8 @@ int main() {
     int read_bytes;   //num de bytes recibidos en un mensaje
     int send_bytes;  //num de bytes enviados en un mensaje
 
-    mensaje="1";
+    cout <<"Introduzca un numero: " <<endl;
+    cin >>mensaje;
     send_bytes = chan.Send(socket_fd, mensaje);
     if(send_bytes == -1) {
             cerr << "Error al enviar datos: " << strerror(errno) << endl;

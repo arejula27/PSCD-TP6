@@ -16,30 +16,23 @@
 
 using namespace std;
 
+const int MAX=100;
+
 //-------------------------------------------------------------
 
 void Despliegue(Socket& soc, int client_fd){
-    char ip[15]="", ip1[15]="", ip2[15]="", ip3[15]="";
-    char puerto[6]="", puerto1[6]="", puerto2[6]="", puerto3[6]="";
+    char ip[25]="", ip1[25]="", ip2[25]="", ip3[25]="";
+    char puerto[10]="", puerto1[10]="", puerto2[10]="", puerto3[10]="";
     ifstream f;
     f.open("ip-puerto.txt");
     if(f.is_open()){
-
-        f.getline(ip1, 16, '\n');
-        f.getline(puerto1, 16, '\n');
-        cout << ip1 << endl;
-        cout << puerto1 << endl;
-
-        f.getline(ip2, 16, '\n');
-        f.getline(puerto2, 16, '\n');
-        cout << ip2 << endl;
-        cout << puerto2 << endl;
-
-        f.getline(ip3, 16, '\n');
-        f.getline(puerto3, 16, '\n');
-        cout << ip3 << endl;
-        cout << puerto3 << endl;
-
+        
+        f.getline(ip1, MAX, '\n');
+        f.getline(puerto1, MAX, '\n');
+        f.getline(ip2, MAX, '\n');
+        f.getline(puerto2, MAX, '\n');
+        f.getline(ip3, MAX, '\n');
+        f.getline(puerto3, MAX, '\n');
         f.close();
         
     }else{
@@ -48,32 +41,32 @@ void Despliegue(Socket& soc, int client_fd){
     
     char buffer[1024];
 
-    cout << "Llega2" << endl;
-
     int rcv_bytes = soc.Recv(client_fd,buffer,1);
-    
+    cout << "Recibido " << buffer << endl;
     if(rcv_bytes<0){
         cerr <<"Error al recibir el mensaje\n";
     }else{
         int numero=atoi(buffer);
+        cout << "Recibido " << numero << endl;
         if((numero>0)&&(numero<=3)){
-            strcpy(ip,ip1);
-            strcpy(puerto,puerto1);
+            strncpy(ip,ip1,(sizeof ip));
+            strncpy(puerto,puerto1,(sizeof puerto));
+            cout <<"LINDA SERVER 1-3\n";
         }else if((numero>3) && numero<=5){
-            strcpy(ip,ip2);
-            strcpy(puerto,puerto2);      
+            strncpy(ip,ip2,(sizeof ip));
+            strncpy(puerto,puerto2,(sizeof puerto));      
+            cout <<"LINDA SERVER 4-5\n";
         }else if(numero==6){
-            strcpy(ip,ip3);
-            strcpy(puerto,puerto3);
+            strncpy(ip,ip3,(sizeof ip));
+            strncpy(puerto,puerto3,(sizeof puerto));
+            cout <<"LINDA SERVER 6\n";
         }
         else{
             exit(1);
         }
     }
-    
     int send_bytes = soc.Send(client_fd, ip);
     send_bytes = soc.Send(client_fd, puerto);
-    
     soc.Close(client_fd);
 }    
 
