@@ -6,31 +6,74 @@
 //*****************************************************************
 
 #include "Socket/Socket.hpp"
-#include "Tupla.hpp"
+#include "Tupla/Tupla.hpp"
 #include <iostream>
 #include <thread>
-#include <vector> 
+#include <vector>
 #include <string>
-#include <regex>
 #include <cstring>
-#include <list> //Lista
-//#include <iterator>
+#include <fstream>
 
 using namespace std;
 
 //-------------------------------------------------------------
 
-void LindaServer(){
+void Despliegue(Socket& soc,int client_fd, int socket_fd){
+    char ip[15], ip1[15], ip2[15], ip3[15];
+    char puerto[6], puerto1[6], puerto2[6], puerto3[6];
+    ifstream f;
+    f.open("ip-puerto.txt");
+    if(f.is_open()){
+        
+        f.getline(ip1, 16);
+        f.getline(puerto1, 16);
 
-}
+        f.getline(ip2, 16);
+        f.getline(puerto2, 16);
 
+        f.getline(ip3, 16);
+        f.getline(puerto3, 16);
+
+        f.close();
+        
+    }else{
+        cerr <<"Error al abrir el fichero\n";
+    }
+    
+    char buffer[1];
+
+    int rcv_bytes = soc.Recv(client_fd,buffer,1);
+    
+    if(rcv_bytes<0){
+        cerr <<"Error al recibir el mensaje\n";
+    }else{
+        int numero=atoi(buffer);
+        if((numero>0)&&(numero<=3)){
+            strcpy(ip,ip1);
+            strcpy(puerto,puerto1);
+        }else if((numero>3) && numero<=5){
+            strcpy(ip,ip2);
+            strcpy(puerto,puerto2);      
+        }else if(numero==6){
+            strcpy(ip,ip3);
+            strcpy(puerto,puerto3);
+        }
+        else{
+            exit(1);
+        }
+    }
+    
+    int send_bytes = soc.Send(client_fd, ip);
+    int send_bytes = soc.Send(client_fd, puerto);
+    
+    soc.Close(client_fd);
+}    
 
 //-------------------------------------------------------------
 int main(int argc, char* argv[]) {
-    list<Tupla> listaTuplas;
     const int N = 13; //¿Se pone aqui el máximo de clientes a la vez o se ponen en el registro de despliegue?
     // Puerto donde escucha el proceso servidor
-    int SERVER_PORT = atoi(argv[1]); //parámetro de invocación
+    int SERVER_PORT = atoi(argv[1]);    //parámetro de invocación
     thread cliente[N];
     int client_fd[N];
 
@@ -67,7 +110,7 @@ int main(int argc, char* argv[]) {
             exit(1);
         }
 
-        cliente[i] = thread(LindaServer); //Introducir parámetros de invocación 
+        cliente[i] = thread(Despliegue,ref(chan),client_fd[i], socket_fd); //Introducir parámetros de invocación 
         cout << "Nuevo cliente " + to_string(i) + " aceptado" + "\n";
     }
 
