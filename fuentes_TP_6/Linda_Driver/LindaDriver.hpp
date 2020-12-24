@@ -16,7 +16,7 @@ using namespace std;
 class LindaDriver {
 public:
 	//constructores -----------------------------
-	LindaDriver(string ip, string puerto);
+	LindaDriver(string ip, int puerto);
 	//destructor -----------------------------
 	~LindaDriver();
 	//operadores -----------------------------
@@ -46,7 +46,7 @@ public:
 
 	//...
 private:
-	string puerto;
+	int puerto;
 	string ip;
 };
 #endif

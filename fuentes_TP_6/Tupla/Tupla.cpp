@@ -61,12 +61,12 @@ Tupla::Tupla(string s1, string s2, string s3, string s4, string s5, string s6) {
     data->at(5) = s6;
 }
 
-Tupla::Tupla(Tupla& t) {
-    int max=t.size();
+Tupla::Tupla(const Tupla& t) {
+    int max=t.data->size();
     data = new vector<string>(max,"");
     int i=0;
     while(i<max){
-        string x=t.get(i);
+        string x=t.data->at(i);
         set(i,x);
         i++;
     }

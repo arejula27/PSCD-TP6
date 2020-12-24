@@ -18,21 +18,27 @@ using namespace std;
 
 //-------------------------------------------------------------
 
-void Despliegue(Socket& soc,int client_fd, int socket_fd){
-    char ip[15], ip1[15], ip2[15], ip3[15];
-    char puerto[6], puerto1[6], puerto2[6], puerto3[6];
+void Despliegue(Socket& soc, int client_fd){
+    char ip[15]="", ip1[15]="", ip2[15]="", ip3[15]="";
+    char puerto[6]="", puerto1[6]="", puerto2[6]="", puerto3[6]="";
     ifstream f;
     f.open("ip-puerto.txt");
     if(f.is_open()){
-        
-        f.getline(ip1, 16);
-        f.getline(puerto1, 16);
 
-        f.getline(ip2, 16);
-        f.getline(puerto2, 16);
+        f.getline(ip1, 16, '\n');
+        f.getline(puerto1, 16, '\n');
+        cout << ip1 << endl;
+        cout << puerto1 << endl;
 
-        f.getline(ip3, 16);
-        f.getline(puerto3, 16);
+        f.getline(ip2, 16, '\n');
+        f.getline(puerto2, 16, '\n');
+        cout << ip2 << endl;
+        cout << puerto2 << endl;
+
+        f.getline(ip3, 16, '\n');
+        f.getline(puerto3, 16, '\n');
+        cout << ip3 << endl;
+        cout << puerto3 << endl;
 
         f.close();
         
@@ -40,7 +46,9 @@ void Despliegue(Socket& soc,int client_fd, int socket_fd){
         cerr <<"Error al abrir el fichero\n";
     }
     
-    char buffer[1];
+    char buffer[1024];
+
+    cout << "Llega2" << endl;
 
     int rcv_bytes = soc.Recv(client_fd,buffer,1);
     
@@ -64,7 +72,7 @@ void Despliegue(Socket& soc,int client_fd, int socket_fd){
     }
     
     int send_bytes = soc.Send(client_fd, ip);
-    int send_bytes = soc.Send(client_fd, puerto);
+    send_bytes = soc.Send(client_fd, puerto);
     
     soc.Close(client_fd);
 }    
@@ -110,7 +118,7 @@ int main(int argc, char* argv[]) {
             exit(1);
         }
 
-        cliente[i] = thread(Despliegue,ref(chan),client_fd[i], socket_fd); //Introducir parámetros de invocación 
+        cliente[i] = thread(Despliegue,ref(chan),client_fd[i]); //Introducir parámetros de invocación 
         cout << "Nuevo cliente " + to_string(i) + " aceptado" + "\n";
     }
 

@@ -10,7 +10,7 @@
 //TODO
 #include <iostream>
 #include "Linda_Driver/LindaDriver.hpp"
-#include "Tupla.hpp"r
+#include "Tupla.hpp"
 
 using namespace std;
 
@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
     }
 
     // un driver con los datos pasados en la invocación
-    LindaDriver LD(argv[1], argv[2]);
+    LindaDriver LD(argv[1], atoi(argv[2]));
     // Ya ha contactado con el registro, obtenido los datos necesarios de
     // los tres servidores y establecido las conexiones requeridas
 

@@ -7,9 +7,10 @@
 
 #include <cassert>
 #include <string>
+#include "Socket.hpp"
 #include "LindaDriver.hpp"
  
-    LindaDriver::LindaDriver(string ip, string puerto){
+    LindaDriver::LindaDriver(string ip, int puerto){
 		this->puerto = puerto;
 		this->ip = ip;
     }
@@ -21,7 +22,13 @@
 
 	//PostNote
 	void LindaDriver::PN(const Tupla t){
-
+		Socket chan(ip, puerto);
+		Tupla tup(t);
+		string mensaje=to_string(tup.size());
+		int socket_fd;
+    	int send_bytes = chan.Send(socket_fd, mensaje);
+		int read_bytes = chan.Recv(socket_fd, buffer, MESSAGE_SIZE);
+		read_bytes = chan.Recv(socket_fd, buffer, MESSAGE_SIZE);
     }
 
 	//Pre:  "p" y "t" tienen el mismo tamaño
