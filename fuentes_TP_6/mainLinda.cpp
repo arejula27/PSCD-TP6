@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
     // un driver con los datos pasados en la invocación
     LindaDriver LD(argv[1], atoi(argv[2]));
     // Ya ha contactado con el registro, obtenido los datos necesarios de
-    // los tres servidores y establecido las conexiones requeridas
+    // los treus servidores y establecido las conexiones requeridas
 
     // Varias formas de construir tuplas
     Tupla t1("1","mi casa","árbol");  // 3 elementos

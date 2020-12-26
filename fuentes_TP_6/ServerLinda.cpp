@@ -13,6 +13,7 @@
 #include <string>
 #include <regex>
 #include <cstring>
+#include <atomic>
 #include <list> //Lista
 //#include <iterator>
 
@@ -20,7 +21,73 @@ using namespace std;
 
 //-------------------------------------------------------------
 
-void LindaServer(){
+void LindaServer(list<Tupla>& listaTuplas, Socket& chan, int client_fd, atomic_flag& tas){
+    
+    string in;
+    int tamanyo;
+    chan.Recv(client_fd, in, 1024);
+
+    if(in.substr(0,2)=="PN"){ //PN1
+        tamanyo=stoi(in.substr(3));
+        int send_bytes = chan.Send(client_fd, "OK PN");
+		if(send_bytes<0){
+			cerr << "Error send" << endl;
+			exit(1);
+		}
+        string mensTup;
+        int read_bytes = chan.Recv(client_fd, mensTup, 1024);
+        if(read_bytes<0){
+			cerr << "Error recv" << endl;
+			exit(1);
+		}
+        Tupla t(tamanyo);
+        t.from_string(mensTup);
+        while(tas.test_and_set()); //solicitar acceso memoria
+        listaTuplas.push_back(t); 
+        tas.clear(); //soltar acceso memoria
+        int send_bytes = chan.Send(client_fd, "TERMINADO");
+
+    }else if(in.substr(0,2)=="RN"){ //en caso de no encontrar la tupla a eliminar en la lista, devolvemos la inicial
+        tamanyo=stoi(in.substr(3));
+        int send_bytes = chan.Send(client_fd, "OK RN");
+		if(send_bytes<0){
+			cerr << "Error send" << endl;
+			exit(1);
+		}
+
+        string mensTup;
+        int read_bytes = chan.Recv(client_fd, mensTup, 1024);
+        if(read_bytes<0){
+			cerr << "Error recv" << endl;
+			exit(1);
+		}
+        
+        Tupla t(tamanyo);
+        t.from_string(mensTup);
+
+    }else if(in.substr(0,4)=="RN_2"){
+        int send_bytes = chan.Send(client_fd, "OK RN_2");
+		if(send_bytes<0){
+			cerr << "Error send" << endl;
+			exit(1);
+		}
+
+    }else if(in.substr(0,3)=="RDN"){
+        int send_bytes = chan.Send(client_fd, "OK RDN");
+		if(send_bytes<0){
+			cerr << "Error send" << endl;
+			exit(1);
+		}
+        
+    }else if(in.substr(0,5)=="RDN_2"){
+        int send_bytes = chan.Send(client_fd, "OK RDN_2");
+		if(send_bytes<0){
+			cerr << "Error send" << endl;
+			exit(1);
+		}
+    }
+    
+    chan.Close(client_fd);
 
 }
 
@@ -28,6 +95,7 @@ void LindaServer(){
 //-------------------------------------------------------------
 int main(int argc, char* argv[]) {
     list<Tupla> listaTuplas;
+    atomic_flag tas=ATOMIC_FLAG_INIT;
     const int N = 13; //¿Se pone aqui el máximo de clientes a la vez o se ponen en el registro de despliegue?
     // Puerto donde escucha el proceso servidor
     int SERVER_PORT = atoi(argv[1]); //parámetro de invocación
@@ -67,7 +135,7 @@ int main(int argc, char* argv[]) {
             exit(1);
         }
 
-        cliente[i] = thread(LindaServer); //Introducir parámetros de invocación 
+        cliente[i] = thread(LindaServer, ref(listaTuplas), ref(chan), client_fd, ref(tas)); //Introducir parámetros de invocación 
         cout << "Nuevo cliente " + to_string(i) + " aceptado" + "\n";
     }
 

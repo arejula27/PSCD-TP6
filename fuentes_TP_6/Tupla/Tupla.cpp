@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include <cassert>
+#include <regex>
 #include <string.h>
 #include <Tupla.hpp>
 
@@ -118,10 +119,11 @@ bool Tupla::match(Tupla& p) {
     if(tam==p.size()){
         int i=0;
         while(i<tam && igual){
-            if(get(i)!=p.get(i)) igual=false;
+            if(get(i)!=p.get(i) && !regex_match(p.get(i),regex("\\?[A-Z]")) ) igual=false; 
             i++;
         }
     }
     else igual=false;
     return igual;
+
 }
