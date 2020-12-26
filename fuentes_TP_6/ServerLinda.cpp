@@ -15,7 +15,7 @@
 #include <cstring>
 #include <atomic>
 #include <list> //Lista
-//#include <iterator>
+#include <iterator>
 
 using namespace std;
 
@@ -64,7 +64,29 @@ void LindaServer(list<Tupla>& listaTuplas, Socket& chan, int client_fd, atomic_f
         
         Tupla t(tamanyo);
         t.from_string(mensTup);
-
+        bool encontrado=false;
+        while(tas.test_and_set());
+        for (auto& i : listaTuplas) {
+            if(i.match(t)){
+                encontrado=true;
+                int send_bytes = chan.Send(client_fd, i.to_string());
+                if(send_bytes<0){
+			        cerr << "Error send" << endl;
+			        exit(1);
+		        }
+                break;
+            }
+        }
+        tas.clear();
+        if(!encontrado){
+            int send_bytes = chan.Send(client_fd, mensTup);   
+	        if(send_bytes<0){
+			    cerr << "Error send" << endl;
+			    exit(1);
+		    }
+        }
+        int send_bytes = chan.Send(client_fd, "TERMINADO");
+        
     }else if(in.substr(0,4)=="RN_2"){
         int send_bytes = chan.Send(client_fd, "OK RN_2");
 		if(send_bytes<0){

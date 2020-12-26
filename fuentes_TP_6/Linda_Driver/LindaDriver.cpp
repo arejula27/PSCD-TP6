@@ -81,9 +81,14 @@
 			cerr << "Error send" << endl;
 			exit(1);
 		}
-		//hasta aqui bien
-		
 
+		int read_bytes = chan.Recv(socket_fd, mensTup, 1024);
+		if(read_bytes<0){
+			cerr << "Error recv" << endl;
+			exit(1);
+		}
+		t.from_string(mensTup);
+		
 		int read_bytes = chan.Recv(socket_fd, mensTup, 1024);
 		if(read_bytes<0 || mensTup != "TERMINADO"){
 			cerr << "Error final" << endl;
@@ -96,6 +101,7 @@
 	//      "p2" y "t2" tienen el mismo tamaño
 	//Post: Remove Notes, siendo "p1" y "p2" los patrones y "t1" y "t2" las tuplas
 	void LindaDriver::RN_2(const Tupla p1, const Tupla p2, Tupla& t1, Tupla& t2){
+		//TODO
         Tupla tup(t1);
 		string mensaje=to_string(tup.size());
 		int puertodev;
@@ -167,6 +173,7 @@
 	//      "p2" y "t2" tienen el mismo tamaño
 	//Post: ReaD Notes, siendo "p1" y "p2" los patrones y "t1" y "t2" las tuplas
 	void LindaDriver::RDN_2(const Tupla p1, const Tupla p2, Tupla& t1, Tupla& t2){
+		//TODO
         Tupla tup(t1);
 		string mensaje=to_string(tup.size());
 		int puertodev;
