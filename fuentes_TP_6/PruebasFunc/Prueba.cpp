@@ -1,3 +1,4 @@
+//Esto estaba en la carpeta tupla, para el makefile se necesita esta tambien
 #include "Tupla.hpp"
 using namespace std;
 int main(int argc, char* argv[]) {
