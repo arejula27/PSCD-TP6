@@ -1,4 +1,4 @@
-# PSCD-TP6
+# Hector sapo
 
 Git clone http... --> Descarga el repo
 git commit -a --> Establece los cambios definitivos, al darle a enter tienes que poner un mensaje
@@ -9,3 +9,4 @@ git push --> Subir los archivos al repo en github
 git add . --> Sube todos los archivos editados para poder commitearlos
 
 Git status --> Ver el estado del repo local
+
